@@ -1,0 +1,28 @@
+DESCRIPTION
+"""""""""""
+ 
+edoop is just a simple erlang module that makes it easy to write
+and run Streaming programs for Hadoop very easy.
+ 
+INSTALLATION
+""""""""""""
+
+All you need to do is run: erlc edoop.erl 
+ 
+USAGE
+"""""
+ 
+hadoop fs -put brian.txt brian.txt
+
+hadoop jar $STREAMING_PATH/hadoop-*-streaming.jar -input brian.txt -output wordcount \
+    -mapper 'escript wordcount.erl map' -reducer 'escript wordcount.erl reduce' \
+    -file wordcount.erl -file edoop.beam 
+
+hadoop fs -get wordcount .
+
+cat wordcount/part*
+ 
+MORE INFO
+"""""""""
+ 
+http://github.com/eliast/edoop
